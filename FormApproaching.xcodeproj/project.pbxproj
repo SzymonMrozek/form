@@ -7,14 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C8024F023996EB100105789 /* FormSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8024EF23996EB100105789 /* FormSectionView.swift */; };
+		1C8024F4239A617500105789 /* AutoMockable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8024F3239A617500105789 /* AutoMockable.generated.swift */; };
+		1C802508239A776A00105789 /* SharedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C802507239A776A00105789 /* SharedMocks.swift */; };
 		1CE049F623928E55000C99D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE049F523928E55000C99D9 /* AppDelegate.swift */; };
-		1CE049F823928E55000C99D9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE049F723928E55000C99D9 /* SceneDelegate.swift */; };
-		1CE049FA23928E55000C99D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE049F923928E55000C99D9 /* ViewController.swift */; };
-		1CE049FD23928E55000C99D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CE049FB23928E55000C99D9 /* Main.storyboard */; };
 		1CE049FF23928E57000C99D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CE049FE23928E57000C99D9 /* Assets.xcassets */; };
 		1CE04A0223928E57000C99D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CE04A0023928E57000C99D9 /* LaunchScreen.storyboard */; };
-		1CE04A0D23928E57000C99D9 /* FormApproachingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE04A0C23928E57000C99D9 /* FormApproachingTests.swift */; };
+		1CE04A0D23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE04A0C23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift */; };
 		1CE04A1823928E57000C99D9 /* FormApproachingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE04A1723928E57000C99D9 /* FormApproachingUITests.swift */; };
+		1CFE2B5A2398112A001CA5B6 /* FormModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B592398112A001CA5B6 /* FormModelController.swift */; };
+		1CFE2B5D2398118A001CA5B6 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B5C2398118A001CA5B6 /* Cancellable.swift */; };
+		1CFE2B5F2398120C001CA5B6 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B5E2398120C001CA5B6 /* Dependencies.swift */; };
+		1CFE2B6223981285001CA5B6 /* FormBaseDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B6123981285001CA5B6 /* FormBaseDataResponse.swift */; };
+		1CFE2B64239814A7001CA5B6 /* FormViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B63239814A7001CA5B6 /* FormViewModelBuilder.swift */; };
+		1CFE2B662398152E001CA5B6 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B652398152E001CA5B6 /* FormView.swift */; };
+		1CFE2B6923981692001CA5B6 /* FormPhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B6823981692001CA5B6 /* FormPhotoPickerView.swift */; };
+		1CFE2B6B239819AD001CA5B6 /* FormEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B6A239819AD001CA5B6 /* FormEditor.swift */; };
+		1CFE2B6D239820B2001CA5B6 /* UploadPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B6C239820B2001CA5B6 /* UploadPhotoResponse.swift */; };
+		1CFE2B6F23985C59001CA5B6 /* FormPhotoPickerViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B6E23985C59001CA5B6 /* FormPhotoPickerViewModelBuilder.swift */; };
+		1CFE2B7123990BBE001CA5B6 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B7023990BBE001CA5B6 /* FormViewController.swift */; };
+		1CFE2B73239917E2001CA5B6 /* FormCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B72239917E2001CA5B6 /* FormCoordinator.swift */; };
+		1CFE2B752399195E001CA5B6 /* ControllersBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B742399195E001CA5B6 /* ControllersBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +48,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C8024EF23996EB100105789 /* FormSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionView.swift; sourceTree = "<group>"; };
+		1C8024F3239A617500105789 /* AutoMockable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoMockable.generated.swift; sourceTree = "<group>"; };
+		1C802507239A776A00105789 /* SharedMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedMocks.swift; sourceTree = "<group>"; };
 		1CE049F223928E55000C99D9 /* FormApproaching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormApproaching.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CE049F523928E55000C99D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1CE049F723928E55000C99D9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1CE049F923928E55000C99D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1CE049FC23928E55000C99D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1CE049FE23928E57000C99D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1CE04A0123928E57000C99D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1CE04A0323928E57000C99D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CE04A0823928E57000C99D9 /* FormApproachingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormApproachingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1CE04A0C23928E57000C99D9 /* FormApproachingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormApproachingTests.swift; sourceTree = "<group>"; };
+		1CE04A0C23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPhotoPickerViewModelBuilderTests.swift; sourceTree = "<group>"; };
 		1CE04A0E23928E57000C99D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CE04A1323928E57000C99D9 /* FormApproachingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormApproachingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CE04A1723928E57000C99D9 /* FormApproachingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormApproachingUITests.swift; sourceTree = "<group>"; };
 		1CE04A1923928E57000C99D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CFE2B592398112A001CA5B6 /* FormModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormModelController.swift; sourceTree = "<group>"; };
+		1CFE2B5C2398118A001CA5B6 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		1CFE2B5E2398120C001CA5B6 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		1CFE2B6123981285001CA5B6 /* FormBaseDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormBaseDataResponse.swift; sourceTree = "<group>"; };
+		1CFE2B63239814A7001CA5B6 /* FormViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModelBuilder.swift; sourceTree = "<group>"; };
+		1CFE2B652398152E001CA5B6 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
+		1CFE2B6823981692001CA5B6 /* FormPhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPhotoPickerView.swift; sourceTree = "<group>"; };
+		1CFE2B6A239819AD001CA5B6 /* FormEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEditor.swift; sourceTree = "<group>"; };
+		1CFE2B6C239820B2001CA5B6 /* UploadPhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoResponse.swift; sourceTree = "<group>"; };
+		1CFE2B6E23985C59001CA5B6 /* FormPhotoPickerViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPhotoPickerViewModelBuilder.swift; sourceTree = "<group>"; };
+		1CFE2B7023990BBE001CA5B6 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		1CFE2B72239917E2001CA5B6 /* FormCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCoordinator.swift; sourceTree = "<group>"; };
+		1CFE2B742399195E001CA5B6 /* ControllersBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +102,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C8024EE23996EA200105789 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1CFE2B652398152E001CA5B6 /* FormView.swift */,
+				1C8024EF23996EB100105789 /* FormSectionView.swift */,
+				1CFE2B6723981685001CA5B6 /* Photo */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1CE049E923928E55000C99D9 = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +135,10 @@
 		1CE049F423928E55000C99D9 /* FormApproaching */ = {
 			isa = PBXGroup;
 			children = (
+				1CFE2B602398127A001CA5B6 /* Models */,
+				1CFE2B5B23981184001CA5B6 /* Utils */,
+				1CFE2B5823981122001CA5B6 /* Form */,
 				1CE049F523928E55000C99D9 /* AppDelegate.swift */,
-				1CE049F723928E55000C99D9 /* SceneDelegate.swift */,
-				1CE049F923928E55000C99D9 /* ViewController.swift */,
-				1CE049FB23928E55000C99D9 /* Main.storyboard */,
 				1CE049FE23928E57000C99D9 /* Assets.xcassets */,
 				1CE04A0023928E57000C99D9 /* LaunchScreen.storyboard */,
 				1CE04A0323928E57000C99D9 /* Info.plist */,
@@ -113,7 +149,9 @@
 		1CE04A0B23928E57000C99D9 /* FormApproachingTests */ = {
 			isa = PBXGroup;
 			children = (
-				1CE04A0C23928E57000C99D9 /* FormApproachingTests.swift */,
+				1C8024F3239A617500105789 /* AutoMockable.generated.swift */,
+				1CE04A0C23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift */,
+				1C802507239A776A00105789 /* SharedMocks.swift */,
 				1CE04A0E23928E57000C99D9 /* Info.plist */,
 			);
 			path = FormApproachingTests;
@@ -126,6 +164,47 @@
 				1CE04A1923928E57000C99D9 /* Info.plist */,
 			);
 			path = FormApproachingUITests;
+			sourceTree = "<group>";
+		};
+		1CFE2B5823981122001CA5B6 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				1C8024EE23996EA200105789 /* Views */,
+				1CFE2B72239917E2001CA5B6 /* FormCoordinator.swift */,
+				1CFE2B592398112A001CA5B6 /* FormModelController.swift */,
+				1CFE2B63239814A7001CA5B6 /* FormViewModelBuilder.swift */,
+				1CFE2B6A239819AD001CA5B6 /* FormEditor.swift */,
+				1CFE2B7023990BBE001CA5B6 /* FormViewController.swift */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		1CFE2B5B23981184001CA5B6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1CFE2B5C2398118A001CA5B6 /* Cancellable.swift */,
+				1CFE2B5E2398120C001CA5B6 /* Dependencies.swift */,
+				1CFE2B742399195E001CA5B6 /* ControllersBuilder.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		1CFE2B602398127A001CA5B6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1CFE2B6123981285001CA5B6 /* FormBaseDataResponse.swift */,
+				1CFE2B6C239820B2001CA5B6 /* UploadPhotoResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1CFE2B6723981685001CA5B6 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				1CFE2B6823981692001CA5B6 /* FormPhotoPickerView.swift */,
+				1CFE2B6E23985C59001CA5B6 /* FormPhotoPickerViewModelBuilder.swift */,
+			);
+			path = Photo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +231,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1CE04A1F23928E57000C99D9 /* Build configuration list for PBXNativeTarget "FormApproachingTests" */;
 			buildPhases = (
+				1C8024F1239A54C900105789 /* Generate mocks */,
 				1CE04A0423928E57000C99D9 /* Sources */,
 				1CE04A0523928E57000C99D9 /* Frameworks */,
 				1CE04A0623928E57000C99D9 /* Resources */,
@@ -234,7 +314,6 @@
 			files = (
 				1CE04A0223928E57000C99D9 /* LaunchScreen.storyboard in Resources */,
 				1CE049FF23928E57000C99D9 /* Assets.xcassets in Resources */,
-				1CE049FD23928E55000C99D9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,14 +333,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1C8024F1239A54C900105789 /* Generate mocks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate mocks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/Pods/Sourcery/bin/sourcery\" --sources \"${PROJECT_DIR}/FormApproaching/\" --templates \"${PROJECT_DIR}/SourceryTemplates/AutoMockable.stencil\" --output \"${PROJECT_DIR}/FormApproachingTests/AutoMockable.generated.swift\" --disableCache\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1CE049EE23928E55000C99D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CE049FA23928E55000C99D9 /* ViewController.swift in Sources */,
+				1CFE2B752399195E001CA5B6 /* ControllersBuilder.swift in Sources */,
+				1CFE2B6D239820B2001CA5B6 /* UploadPhotoResponse.swift in Sources */,
+				1CFE2B5D2398118A001CA5B6 /* Cancellable.swift in Sources */,
+				1CFE2B7123990BBE001CA5B6 /* FormViewController.swift in Sources */,
+				1C8024F023996EB100105789 /* FormSectionView.swift in Sources */,
+				1CFE2B6B239819AD001CA5B6 /* FormEditor.swift in Sources */,
+				1CFE2B662398152E001CA5B6 /* FormView.swift in Sources */,
+				1CFE2B6923981692001CA5B6 /* FormPhotoPickerView.swift in Sources */,
+				1CFE2B5A2398112A001CA5B6 /* FormModelController.swift in Sources */,
 				1CE049F623928E55000C99D9 /* AppDelegate.swift in Sources */,
-				1CE049F823928E55000C99D9 /* SceneDelegate.swift in Sources */,
+				1CFE2B64239814A7001CA5B6 /* FormViewModelBuilder.swift in Sources */,
+				1CFE2B6F23985C59001CA5B6 /* FormPhotoPickerViewModelBuilder.swift in Sources */,
+				1CFE2B73239917E2001CA5B6 /* FormCoordinator.swift in Sources */,
+				1CFE2B5F2398120C001CA5B6 /* Dependencies.swift in Sources */,
+				1CFE2B6223981285001CA5B6 /* FormBaseDataResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +381,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CE04A0D23928E57000C99D9 /* FormApproachingTests.swift in Sources */,
+				1C802508239A776A00105789 /* SharedMocks.swift in Sources */,
+				1CE04A0D23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift in Sources */,
+				1C8024F4239A617500105789 /* AutoMockable.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +411,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1CE049FB23928E55000C99D9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1CE049FC23928E55000C99D9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1CE04A0023928E57000C99D9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
