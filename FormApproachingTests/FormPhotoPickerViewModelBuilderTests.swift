@@ -5,7 +5,7 @@ class FormApproachingTests: XCTestCase {
     private var sut: FormPhotoPickerViewModelBuilder!
     private var modelControllerMock: FormModelControllingMock!
     private var formEditorMock: FormEditingMock!
-    private var viewUpdatesMock: FormPhotoPickerViUpdatesMock!
+    private var viewUpdatesMock: FormPhotoPickerViewUpdates!
     
     private let urlMock = URL(string: "https://mocked.com")!
     
