@@ -1,6 +1,6 @@
 import Foundation
 
-struct FormModel {
+struct FormData {
     struct PhotoSectionMeta {
         let maxCount: Int
         let title: String
@@ -20,7 +20,7 @@ enum FormUploadPhotoError: Error, PresentableError {
 // sourcery: AutoMockable
 protocol FormModelControlling {
     func getFormData(
-        completion: @escaping (Result<FormModel, GetFormError>) -> Void
+        completion: @escaping (Result<FormData, GetFormError>) -> Void
     ) -> Cancellable
     
     func uploadPhoto(
@@ -39,14 +39,14 @@ struct FormModelController: FormModelControlling {
     }
     
     func getFormData(
-        completion: @escaping (Result<FormModel, GetFormError>) -> Void
+        completion: @escaping (Result<FormData, GetFormError>) -> Void
     ) -> Cancellable {
         return apiResourceProviding.getFormBaseData(
             completion: {
                 switch $0 {
                 case .success(let response):
-                    let model = FormModel(
-                        photoSection: FormModel.PhotoSectionMeta(
+                    let model = FormData(
+                        photoSection: FormData.PhotoSectionMeta(
                             maxCount: response.photosFieldMaxCount,
                             title: response.photosSectionTitle
                         )

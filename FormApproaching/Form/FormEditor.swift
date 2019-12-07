@@ -4,7 +4,7 @@ struct FormEdition: Codable {
     var photos: [URL]
 }
 
-protocol FormEditing {
+protocol FormEditing: AnyObject {
     var currentVersion: FormEdition { get }
     
     func commit<T>(_ keyPath: WritableKeyPath<FormEdition, T>, value: T)

@@ -112,6 +112,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		1CB37AC4239BE35700FA5388 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				1CE04A0C23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
 		1CE049E923928E55000C99D9 = {
 			isa = PBXGroup;
 			children = (
@@ -149,8 +157,8 @@
 		1CE04A0B23928E57000C99D9 /* FormApproachingTests */ = {
 			isa = PBXGroup;
 			children = (
+				1CB37AC4239BE35700FA5388 /* Form */,
 				1C8024F3239A617500105789 /* AutoMockable.generated.swift */,
-				1CE04A0C23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift */,
 				1C802507239A776A00105789 /* SharedMocks.swift */,
 				1CE04A0E23928E57000C99D9 /* Info.plist */,
 			);

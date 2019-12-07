@@ -8,7 +8,7 @@ enum FormPhotoPickerViewCoordination {
 // sourcery: AutoMockable
 protocol FormPhotoPickerViewModelBuilding {
     func buildViewModel(
-        photoSectionMeta: FormModel.PhotoSectionMeta,
+        photoSectionMeta: FormData.PhotoSectionMeta,
         coordination: @escaping (FormPhotoPickerViewCoordination) -> Void
     ) -> FormSectionViewModel
 }
@@ -25,9 +25,9 @@ struct FormPhotoPickerViewModelBuilder {
         self.formModelController = formModelController
         self.formEditor = formEditor
     }
-    
+
     func buildViewModel(
-        photoSectionMeta: FormModel.PhotoSectionMeta,
+        photoSectionMeta: FormData.PhotoSectionMeta,
         coordination: @escaping (FormPhotoPickerViewCoordination) -> Void
     ) -> FormSectionViewModel {
         return FormSectionViewModel(

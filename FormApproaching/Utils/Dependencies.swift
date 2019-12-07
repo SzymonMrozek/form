@@ -1,5 +1,6 @@
 import Foundation
 
+// This interface should be more like, `func perform(request: Request, completion @escaping<Resource, APIError> but in this case it's made for simplifying the app mocking in AppDelegate.swift
 protocol ApiResourceProviding {
     func getFormBaseData(
         completion: @escaping (Result<FormBaseDataResponse, URLError>) -> Void

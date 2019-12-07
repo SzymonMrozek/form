@@ -34,7 +34,7 @@ struct FormViewModelBuilder: FormViewModelBuilding {
         formModelController.getFormData(completion: { result in
             switch result {
             case .success(let model):
-                let sections = self.buildSections(basedOnFormModel: model)
+                let sections = self.buildSections(basedOnFormData: model)
                 updates.update(with: sections)
             case .failure:
                 fatalError()
@@ -46,15 +46,15 @@ struct FormViewModelBuilder: FormViewModelBuilding {
     }
     
     private func buildSections(
-        basedOnFormModel formModel: FormModel
+        basedOnFormData formData: FormData
     ) -> [FormSectionViewModel] {
         return [
-            photoPickerSection(formPhotoSection: formModel.photoSection)
+            photoPickerSection(formPhotoSection: formData.photoSection)
         ]
     }
     
     private func photoPickerSection(
-        formPhotoSection: FormModel.PhotoSectionMeta
+        formPhotoSection: FormData.PhotoSectionMeta
     ) -> FormSectionViewModel {
         return photoPickerViewModelBuilder.buildViewModel(
             photoSectionMeta: formPhotoSection,

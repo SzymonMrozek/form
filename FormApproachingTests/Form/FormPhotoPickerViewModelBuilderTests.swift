@@ -3,32 +3,32 @@ import XCTest
 
 class FormApproachingTests: XCTestCase {
     private var sut: FormPhotoPickerViewModelBuilder!
-    private var modelControllerMock: FormModelControllingMock!
+    private var formModelControllerMock: FormModelControllingMock!
     private var formEditorMock: FormEditingMock!
-    private var viewUpdatesMock: FormPhotoPickerViewUpdates!
+    private var viewUpdatesMock: FormPhotoPickerViewUpdatesMock!
     
     private let urlMock = URL(string: "https://mocked.com")!
     
     override func setUp() {
         super.setUp()
-        modelControllerMock = FormModelControllingMock()
+        formModelControllerMock = FormModelControllingMock()
         formEditorMock = FormEditingMock()
         viewUpdatesMock = FormPhotoPickerViewUpdatesMock()
         
         sut = FormPhotoPickerViewModelBuilder(
-            formModelController: modelControllerMock,
+            formModelController: formModelControllerMock,
             formEditor: formEditorMock
         )
     }
     
     override func tearDown() {
-        modelControllerMock = nil
+        formModelControllerMock.uploadPhotoUrlCompletionReceivedArguments = nil
+        formModelControllerMock = nil
         formEditorMock = nil
         viewUpdatesMock = nil
         sut = nil
         super.tearDown()
     }
-    
     
     func test_buildViewModel_ShouldReturnNoPhotosAndAddCell_WhenNoPhotosInCurrentFormVersion() throws {
         // Arrange
@@ -72,7 +72,7 @@ class FormApproachingTests: XCTestCase {
     func test_buildViewModel_ShouldCommitNewPhoto_WhenNewPhotoAddedViaCoordinationAndUploadedSuccessfully() throws {
         // Arrange
         formEditorMock.currentVersion = FormEdition(photos: [])
-        modelControllerMock.uploadPhotoUrlCompletionClosure = { [urlMock] (_, completion) in
+        formModelControllerMock.uploadPhotoUrlCompletionClosure = { [urlMock] (_, completion) in
             completion(.success(urlMock))
             return CancellableMock()
         }
@@ -95,7 +95,7 @@ class FormApproachingTests: XCTestCase {
     func test_buildViewModel_ShouldNotCommitNewPhotoAndPresentError_WhenNewPhotoAddedViaCoordinationAndUploadFailed() throws {
         // Arrange
         formEditorMock.currentVersion = FormEdition(photos: [])
-        modelControllerMock.uploadPhotoUrlCompletionClosure = { (_, completion) in
+        formModelControllerMock.uploadPhotoUrlCompletionClosure = { (_, completion) in
             completion(.failure(.unknown))
             return CancellableMock()
         }
@@ -132,13 +132,33 @@ class FormApproachingTests: XCTestCase {
         XCTAssertEqual(formEditorMock.currentVersion.photos.count, 0)
     }
     
+    func test_deinit_ShouldCancelPhotoUpload_WhenDeinitialized() throws {
+        // Arrange
+        let cancellableMock = CancellableMock()
+        formEditorMock.currentVersion = FormEdition(photos: [])
+        formModelControllerMock.uploadPhotoUrlCompletionReturnValue = cancellableMock
+        
+        // Act
+        try buildViewModel(
+            coordinationOnUploadFailed: { _ in },
+            coordinationPickPhoto: { [urlMock] in $0(urlMock) }
+        )
+        .photoPickerViewModel(updates: viewUpdatesMock)
+        .addNewPhotoCell()()
+        sut = nil
+        formModelControllerMock.uploadPhotoUrlCompletionReceivedArguments = nil
+        
+        // Assert
+        XCTAssertEqual(cancellableMock.cancelCallsCount, 1)
+    }
+    
     private func buildViewModel(
         maxPhotos: Int = 5,
         coordinationOnUploadFailed: ((PresentableError) -> Void)? = nil,
         coordinationPickPhoto: (((URL?) -> Void) -> Void)? = nil
     ) -> FormSectionViewModel {
         return sut.buildViewModel(
-            photoSectionMeta: FormModel.PhotoSectionMeta(maxCount: maxPhotos, title: "title"),
+            photoSectionMeta: FormData.PhotoSectionMeta(maxCount: maxPhotos, title: "title"),
             coordination: {
                 switch $0 {
                 case .didFailToUploadPhoto(let error): coordinationOnUploadFailed?(error)
