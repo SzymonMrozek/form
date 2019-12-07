@@ -24,12 +24,10 @@ struct ControllersBuilder: ControllersBuilding {
         let formModelController = FormModelController(
             apiResourceProviding: dependencies.apiResourceProviding
         )
-        let formEditor = FormEditor()
         let viewModelBuilder = FormViewModelBuilder(
             formModelController: formModelController,
             photoPickerViewModelBuilder: FormPhotoPickerViewModelBuilder(
-                formModelController: formModelController,
-                formEditor: formEditor
+                formModelController: formModelController
             ),
             coordination: coordination
         )

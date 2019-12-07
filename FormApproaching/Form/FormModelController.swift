@@ -1,12 +1,12 @@
 import Foundation
 
-struct FormData {
-    struct PhotoSectionMeta {
+struct FormMetadata {
+    struct PhotoSection {
         let maxCount: Int
         let title: String
     }
     
-    let photoSection: PhotoSectionMeta
+    let photoSection: PhotoSection
 }
 
 enum GetFormError: Error, PresentableError {
@@ -19,34 +19,42 @@ enum FormUploadPhotoError: Error, PresentableError {
 
 // sourcery: AutoMockable
 protocol FormModelControlling {
-    func getFormData(
-        completion: @escaping (Result<FormData, GetFormError>) -> Void
+    var currentlyFilledForm: FilledForm { get }
+    
+    func getFormMetadata(
+        completion: @escaping (Result<FormMetadata, GetFormError>) -> Void
     ) -> Cancellable
     
     func uploadPhoto(
         url: URL,
         completion: @escaping (Result<URL, FormUploadPhotoError>) -> Void
     ) -> Cancellable
+    
+    func commitFormEdition(_ edition: FormEdition)
 }
 
-struct FormModelController: FormModelControlling {
+final class FormModelController: FormModelControlling {
     private let apiResourceProviding: ApiResourceProviding
+    private(set) var currentlyFilledForm: FilledForm = FilledForm(
+        photos: []
+    )
     
     init(
-        apiResourceProviding: ApiResourceProviding
+        apiResourceProviding: ApiResourceProviding,
+        formEditor: (inout FilledForm, FormEdition) -> Void = formEditor
     ) {
         self.apiResourceProviding = apiResourceProviding
     }
     
-    func getFormData(
-        completion: @escaping (Result<FormData, GetFormError>) -> Void
+    func getFormMetadata(
+        completion: @escaping (Result<FormMetadata, GetFormError>) -> Void
     ) -> Cancellable {
         return apiResourceProviding.getFormBaseData(
             completion: {
                 switch $0 {
                 case .success(let response):
-                    let model = FormData(
-                        photoSection: FormData.PhotoSectionMeta(
+                    let model = FormMetadata(
+                        photoSection: FormMetadata.PhotoSection(
                             maxCount: response.photosFieldMaxCount,
                             title: response.photosSectionTitle
                         )
@@ -75,5 +83,19 @@ struct FormModelController: FormModelControlling {
             }
         )
     }
+    
+    func commitFormEdition(_ edition: FormEdition) {
+        formEditor(form: &currentlyFilledForm, edition: edition)
+        saveOnDisk()
+    }
+    
+    private func saveOnDisk() {
+        // ....
+    }
 }
 
+func formEditor(form: inout FilledForm, edition: FormEdition) -> Void {
+    switch edition {
+    case .addPhoto(let url): form.photos.append(url)
+    }
+}

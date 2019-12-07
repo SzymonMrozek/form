@@ -4,7 +4,6 @@ import XCTest
 class FormApproachingTests: XCTestCase {
     private var sut: FormPhotoPickerViewModelBuilder!
     private var formModelControllerMock: FormModelControllingMock!
-    private var formEditorMock: FormEditingMock!
     private var viewUpdatesMock: FormPhotoPickerViewUpdatesMock!
     
     private let urlMock = URL(string: "https://mocked.com")!
@@ -12,19 +11,19 @@ class FormApproachingTests: XCTestCase {
     override func setUp() {
         super.setUp()
         formModelControllerMock = FormModelControllingMock()
-        formEditorMock = FormEditingMock()
+        formModelControllerMock.commitFormEditionClosure = { [unowned formModelControllerMock] in
+            formEditor(form: &formModelControllerMock!.currentlyFilledForm, edition: $0)
+        }
         viewUpdatesMock = FormPhotoPickerViewUpdatesMock()
         
         sut = FormPhotoPickerViewModelBuilder(
-            formModelController: formModelControllerMock,
-            formEditor: formEditorMock
+            formModelController: formModelControllerMock
         )
     }
     
     override func tearDown() {
         formModelControllerMock.uploadPhotoUrlCompletionReceivedArguments = nil
         formModelControllerMock = nil
-        formEditorMock = nil
         viewUpdatesMock = nil
         sut = nil
         super.tearDown()
@@ -32,7 +31,7 @@ class FormApproachingTests: XCTestCase {
     
     func test_buildViewModel_ShouldReturnNoPhotosAndAddCell_WhenNoPhotosInCurrentFormVersion() throws {
         // Arrange
-        formEditorMock.currentVersion = FormEdition(photos: [])
+        formModelControllerMock.currentlyFilledForm = FilledForm(photos: [])
         
         // Act
         let viewModel = try buildViewModel().photoPickerViewModel(updates: viewUpdatesMock)
@@ -44,7 +43,7 @@ class FormApproachingTests: XCTestCase {
     
     func test_buildViewModel_ShouldReturn1PhotoAndAddCell_When1PhotoInCurrentFormVersion() throws {
         // Arrange
-        formEditorMock.currentVersion = FormEdition(photos: [urlMock])
+        formModelControllerMock.currentlyFilledForm = FilledForm(photos: [urlMock])
         
         // Act
         let viewModel = try buildViewModel().photoPickerViewModel(updates: viewUpdatesMock)
@@ -56,7 +55,7 @@ class FormApproachingTests: XCTestCase {
     
     func test_buildViewModel_ShouldReturn3PhotoAndNoAddCell_When3PhotoInCurrentFormVersionAndMaximumCountIs3Photos() throws {
         // Arrange
-        formEditorMock.currentVersion = FormEdition(photos: [urlMock, urlMock, urlMock])
+        formModelControllerMock.currentlyFilledForm = FilledForm(photos: [urlMock, urlMock, urlMock])
         
         // Act
         let viewModel = try buildViewModel(
@@ -71,7 +70,7 @@ class FormApproachingTests: XCTestCase {
     
     func test_buildViewModel_ShouldCommitNewPhoto_WhenNewPhotoAddedViaCoordinationAndUploadedSuccessfully() throws {
         // Arrange
-        formEditorMock.currentVersion = FormEdition(photos: [])
+        formModelControllerMock.currentlyFilledForm = FilledForm(photos: [])
         formModelControllerMock.uploadPhotoUrlCompletionClosure = { [urlMock] (_, completion) in
             completion(.success(urlMock))
             return CancellableMock()
@@ -89,12 +88,12 @@ class FormApproachingTests: XCTestCase {
         let cellsReceivedToUpdate = viewUpdatesMock.updateWithCellsCellsReceivedCells ?? []
         XCTAssertEqual(cellsReceivedToUpdate.count, 2)
         XCTAssertEqual(cellsReceivedToUpdate.photoCellsCount, 1)
-        XCTAssertEqual(formEditorMock.currentVersion.photos.count, 1)
+        XCTAssertEqual(formModelControllerMock.commitFormEditionReceivedEdition, .addPhoto(urlMock))
     }
     
     func test_buildViewModel_ShouldNotCommitNewPhotoAndPresentError_WhenNewPhotoAddedViaCoordinationAndUploadFailed() throws {
         // Arrange
-        formEditorMock.currentVersion = FormEdition(photos: [])
+        formModelControllerMock.currentlyFilledForm = FilledForm(photos: [])
         formModelControllerMock.uploadPhotoUrlCompletionClosure = { (_, completion) in
             completion(.failure(.unknown))
             return CancellableMock()
@@ -112,12 +111,12 @@ class FormApproachingTests: XCTestCase {
         // Assert
         XCTAssertTrue(errorCoordinationCalled)
         XCTAssertEqual(viewUpdatesMock.updateWithCellsCellsCallsCount, 0)
-        XCTAssertEqual(formEditorMock.currentVersion.photos.count, 0)
+        XCTAssertEqual(formModelControllerMock.currentlyFilledForm.photos.count, 0)
     }
     
     func test_buildViewModel_ShouldDoNothing_WhenNewPhotoAdditionCancelled() throws {
         // Arrange
-        formEditorMock.currentVersion = FormEdition(photos: [])
+        formModelControllerMock.currentlyFilledForm = FilledForm(photos: [])
         
         // Act
         try buildViewModel(
@@ -129,13 +128,13 @@ class FormApproachingTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(viewUpdatesMock.updateWithCellsCellsCallsCount, 0)
-        XCTAssertEqual(formEditorMock.currentVersion.photos.count, 0)
+        XCTAssertEqual(formModelControllerMock.currentlyFilledForm.photos.count, 0)
     }
     
     func test_deinit_ShouldCancelPhotoUpload_WhenDeinitialized() throws {
         // Arrange
         let cancellableMock = CancellableMock()
-        formEditorMock.currentVersion = FormEdition(photos: [])
+        formModelControllerMock.currentlyFilledForm = FilledForm(photos: [])
         formModelControllerMock.uploadPhotoUrlCompletionReturnValue = cancellableMock
         
         // Act
@@ -158,7 +157,7 @@ class FormApproachingTests: XCTestCase {
         coordinationPickPhoto: (((URL?) -> Void) -> Void)? = nil
     ) -> FormSectionViewModel {
         return sut.buildViewModel(
-            photoSectionMeta: FormData.PhotoSectionMeta(maxCount: maxPhotos, title: "title"),
+            photoSectionMetadata: FormMetadata.PhotoSection(maxCount: maxPhotos, title: "title"),
             coordination: {
                 switch $0 {
                 case .didFailToUploadPhoto(let error): coordinationOnUploadFailed?(error)

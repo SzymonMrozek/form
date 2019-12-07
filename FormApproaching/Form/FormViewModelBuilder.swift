@@ -31,10 +31,10 @@ struct FormViewModelBuilder: FormViewModelBuilding {
     }
     
     func buildViewModel(updates: FormViewUpdates) -> FormViewModel {
-        formModelController.getFormData(completion: { result in
+        formModelController.getFormMetadata(completion: { result in
             switch result {
-            case .success(let model):
-                let sections = self.buildSections(basedOnFormData: model)
+            case .success(let metadata):
+                let sections = self.buildSections(basedOnFormMetadata: metadata)
                 updates.update(with: sections)
             case .failure:
                 fatalError()
@@ -46,18 +46,18 @@ struct FormViewModelBuilder: FormViewModelBuilding {
     }
     
     private func buildSections(
-        basedOnFormData formData: FormData
+        basedOnFormMetadata formMetadata: FormMetadata
     ) -> [FormSectionViewModel] {
         return [
-            photoPickerSection(formPhotoSection: formData.photoSection)
+            photoPickerSection(photoSectionMetadata: formMetadata.photoSection)
         ]
     }
     
     private func photoPickerSection(
-        formPhotoSection: FormData.PhotoSectionMeta
+        photoSectionMetadata: FormMetadata.PhotoSection
     ) -> FormSectionViewModel {
         return photoPickerViewModelBuilder.buildViewModel(
-            photoSectionMeta: formPhotoSection,
+            photoSectionMetadata: photoSectionMetadata,
             coordination: {
                 switch $0 {
                 case .pickPhoto(let block):

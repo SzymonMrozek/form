@@ -43,21 +43,26 @@ class CancellableMock: Cancellable {
 
 }
 class FormModelControllingMock: FormModelControlling {
-
-    //MARK: - getFormData
-
-    var getFormDataCompletionCallsCount = 0
-    var getFormDataCompletionCalled: Bool {
-        return getFormDataCompletionCallsCount > 0
+    var currentlyFilledForm: FilledForm {
+        get { return underlyingCurrentlyFilledForm }
+        set(value) { underlyingCurrentlyFilledForm = value }
     }
-    var getFormDataCompletionReceivedCompletion: ((Result<FormData, GetFormError>) -> Void)?
-    var getFormDataCompletionReturnValue: Cancellable!
-    var getFormDataCompletionClosure: ((@escaping (Result<FormData, GetFormError>) -> Void) -> Cancellable)?
+    var underlyingCurrentlyFilledForm: FilledForm!
 
-    func getFormData(        completion: @escaping (Result<FormData, GetFormError>) -> Void    ) -> Cancellable {
-        getFormDataCompletionCallsCount += 1
-        getFormDataCompletionReceivedCompletion = completion
-        return getFormDataCompletionClosure.map({ $0(completion) }) ?? getFormDataCompletionReturnValue
+    //MARK: - getFormMetadata
+
+    var getFormMetadataCompletionCallsCount = 0
+    var getFormMetadataCompletionCalled: Bool {
+        return getFormMetadataCompletionCallsCount > 0
+    }
+    var getFormMetadataCompletionReceivedCompletion: ((Result<FormMetadata, GetFormError>) -> Void)?
+    var getFormMetadataCompletionReturnValue: Cancellable!
+    var getFormMetadataCompletionClosure: ((@escaping (Result<FormMetadata, GetFormError>) -> Void) -> Cancellable)?
+
+    func getFormMetadata(        completion: @escaping (Result<FormMetadata, GetFormError>) -> Void    ) -> Cancellable {
+        getFormMetadataCompletionCallsCount += 1
+        getFormMetadataCompletionReceivedCompletion = completion
+        return getFormMetadataCompletionClosure.map({ $0(completion) }) ?? getFormMetadataCompletionReturnValue
     }
 
     //MARK: - uploadPhoto
@@ -76,23 +81,38 @@ class FormModelControllingMock: FormModelControlling {
         return uploadPhotoUrlCompletionClosure.map({ $0(url, completion) }) ?? uploadPhotoUrlCompletionReturnValue
     }
 
+    //MARK: - commitFormEdition
+
+    var commitFormEditionCallsCount = 0
+    var commitFormEditionCalled: Bool {
+        return commitFormEditionCallsCount > 0
+    }
+    var commitFormEditionReceivedEdition: FormEdition?
+    var commitFormEditionClosure: ((FormEdition) -> Void)?
+
+    func commitFormEdition(_ edition: FormEdition) {
+        commitFormEditionCallsCount += 1
+        commitFormEditionReceivedEdition = edition
+        commitFormEditionClosure?(edition)
+    }
+
 }
 class FormPhotoPickerViewModelBuildingMock: FormPhotoPickerViewModelBuilding {
 
     //MARK: - buildViewModel
 
-    var buildViewModelPhotoSectionMetaCoordinationCallsCount = 0
-    var buildViewModelPhotoSectionMetaCoordinationCalled: Bool {
-        return buildViewModelPhotoSectionMetaCoordinationCallsCount > 0
+    var buildViewModelPhotoSectionMetadataCoordinationCallsCount = 0
+    var buildViewModelPhotoSectionMetadataCoordinationCalled: Bool {
+        return buildViewModelPhotoSectionMetadataCoordinationCallsCount > 0
     }
-    var buildViewModelPhotoSectionMetaCoordinationReceivedArguments: (photoSectionMeta: FormData.PhotoSectionMeta, coordination: (FormPhotoPickerViewCoordination) -> Void)?
-    var buildViewModelPhotoSectionMetaCoordinationReturnValue: FormSectionViewModel!
-    var buildViewModelPhotoSectionMetaCoordinationClosure: ((FormData.PhotoSectionMeta, @escaping (FormPhotoPickerViewCoordination) -> Void) -> FormSectionViewModel)?
+    var buildViewModelPhotoSectionMetadataCoordinationReceivedArguments: (photoSectionMetadata: FormMetadata.PhotoSection, coordination: (FormPhotoPickerViewCoordination) -> Void)?
+    var buildViewModelPhotoSectionMetadataCoordinationReturnValue: FormSectionViewModel!
+    var buildViewModelPhotoSectionMetadataCoordinationClosure: ((FormMetadata.PhotoSection, @escaping (FormPhotoPickerViewCoordination) -> Void) -> FormSectionViewModel)?
 
-    func buildViewModel(        photoSectionMeta: FormData.PhotoSectionMeta,        coordination: @escaping (FormPhotoPickerViewCoordination) -> Void    ) -> FormSectionViewModel {
-        buildViewModelPhotoSectionMetaCoordinationCallsCount += 1
-        buildViewModelPhotoSectionMetaCoordinationReceivedArguments = (photoSectionMeta: photoSectionMeta, coordination: coordination)
-        return buildViewModelPhotoSectionMetaCoordinationClosure.map({ $0(photoSectionMeta, coordination) }) ?? buildViewModelPhotoSectionMetaCoordinationReturnValue
+    func buildViewModel(        photoSectionMetadata: FormMetadata.PhotoSection,        coordination: @escaping (FormPhotoPickerViewCoordination) -> Void    ) -> FormSectionViewModel {
+        buildViewModelPhotoSectionMetadataCoordinationCallsCount += 1
+        buildViewModelPhotoSectionMetadataCoordinationReceivedArguments = (photoSectionMetadata: photoSectionMetadata, coordination: coordination)
+        return buildViewModelPhotoSectionMetadataCoordinationClosure.map({ $0(photoSectionMetadata, coordination) }) ?? buildViewModelPhotoSectionMetadataCoordinationReturnValue
     }
 
 }

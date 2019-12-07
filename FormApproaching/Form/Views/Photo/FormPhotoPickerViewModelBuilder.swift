@@ -8,35 +8,30 @@ enum FormPhotoPickerViewCoordination {
 // sourcery: AutoMockable
 protocol FormPhotoPickerViewModelBuilding {
     func buildViewModel(
-        photoSectionMeta: FormData.PhotoSectionMeta,
+        photoSectionMetadata: FormMetadata.PhotoSection,
         coordination: @escaping (FormPhotoPickerViewCoordination) -> Void
     ) -> FormSectionViewModel
 }
 
 struct FormPhotoPickerViewModelBuilder {
     private let formModelController: FormModelControlling
-    private let formEditor: FormEditing
     private let cancellableStore = CancellableStore()
     
-    init(
-        formModelController: FormModelControlling,
-        formEditor: FormEditing
-    ) {
+    init(formModelController: FormModelControlling) {
         self.formModelController = formModelController
-        self.formEditor = formEditor
     }
 
     func buildViewModel(
-        photoSectionMeta: FormData.PhotoSectionMeta,
+        photoSectionMetadata: FormMetadata.PhotoSection,
         coordination: @escaping (FormPhotoPickerViewCoordination) -> Void
     ) -> FormSectionViewModel {
         return FormSectionViewModel(
-            title: photoSectionMeta.title,
+            title: photoSectionMetadata.title,
             selection: .none,
             subSectionViewModel: .photos({ updates in
                 return FormPhotoPickerViewModel(
                     cells: self.buildPhotoCells(
-                        maxCount: photoSectionMeta.maxCount,
+                        maxCount: photoSectionMetadata.maxCount,
                         updates: updates,
                         coordination: coordination
                     )
@@ -50,7 +45,7 @@ struct FormPhotoPickerViewModelBuilder {
         updates: FormPhotoPickerViewUpdates,
         coordination: @escaping (FormPhotoPickerViewCoordination) -> Void
     ) -> [FormPhotoPickerViewModel.CellViewModel] {
-        let currentPhotos = formEditor.currentVersion.photos
+        let currentPhotos = formModelController.currentlyFilledForm.photos
             .map(FormPhotoPickerViewModel.CellViewModel.photo)
         let newPhoto: FormPhotoPickerViewModel.CellViewModel? = {
             guard currentPhotos.count < maxCount else { return nil }
@@ -74,9 +69,8 @@ struct FormPhotoPickerViewModelBuilder {
                 self.formModelController.uploadPhoto(url: url, completion: {
                     switch $0 {
                     case .success(let url):
+                        self.formModelController.commitFormEdition(.addPhoto(url))
                         guard let updates = updates else { return }
-                        let currentPhotos = self.formEditor.currentVersion.photos
-                        self.formEditor.commit(\.photos, value: currentPhotos + [url])
                         let updatedCells = self.buildPhotoCells(
                             maxCount: maxCount,
                             updates: updates,

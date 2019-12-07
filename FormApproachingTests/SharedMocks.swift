@@ -1,16 +1,6 @@
 import Foundation
 @testable import FormApproaching
 
-class FormEditingMock: FormEditing {
-    var currentVersion = FormEdition(photos: [])
-    
-    var commitCallCount: Int = 0
-    
-    func commit<T>(_ keyPath: WritableKeyPath<FormEdition, T>, value: T) {
-        currentVersion[keyPath: keyPath] = value
-    }
-}
-
 class F1Mock<A> {
     var receivedArgument: A?
     var called: Bool = false
