@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+// sourcery: AutoMockable
 protocol FormViewUpdates: AnyObject {
     func update(with sections: [FormSectionViewModel])
 }

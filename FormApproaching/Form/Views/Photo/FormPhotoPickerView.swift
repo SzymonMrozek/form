@@ -81,7 +81,7 @@ final class FormPhotoPickerView: UIView, FormPhotoPickerViewUpdates {
     }
 }
 
-private final class AddNewPhotoCell: UIView {
+final class AddNewPhotoCell: UIView {
     private lazy var button: UIButton = {
         let button = UIButton()
         button.backgroundColor = .green

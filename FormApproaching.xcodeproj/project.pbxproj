@@ -10,6 +10,7 @@
 		1C8024F023996EB100105789 /* FormSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8024EF23996EB100105789 /* FormSectionView.swift */; };
 		1C8024F4239A617500105789 /* AutoMockable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8024F3239A617500105789 /* AutoMockable.generated.swift */; };
 		1C802508239A776A00105789 /* SharedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C802507239A776A00105789 /* SharedMocks.swift */; };
+		1CB37AC6239D14C100FA5388 /* FormViewModelBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB37AC5239D14C000FA5388 /* FormViewModelBuilderTests.swift */; };
 		1CE049F623928E55000C99D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CE049F523928E55000C99D9 /* AppDelegate.swift */; };
 		1CE049FF23928E57000C99D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CE049FE23928E57000C99D9 /* Assets.xcassets */; };
 		1CE04A0223928E57000C99D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CE04A0023928E57000C99D9 /* LaunchScreen.storyboard */; };
@@ -51,6 +52,7 @@
 		1C8024EF23996EB100105789 /* FormSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionView.swift; sourceTree = "<group>"; };
 		1C8024F3239A617500105789 /* AutoMockable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoMockable.generated.swift; sourceTree = "<group>"; };
 		1C802507239A776A00105789 /* SharedMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedMocks.swift; sourceTree = "<group>"; };
+		1CB37AC5239D14C000FA5388 /* FormViewModelBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModelBuilderTests.swift; sourceTree = "<group>"; };
 		1CE049F223928E55000C99D9 /* FormApproaching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormApproaching.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CE049F523928E55000C99D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CE049FE23928E57000C99D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				1CE04A0C23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift */,
+				1CB37AC5239D14C000FA5388 /* FormViewModelBuilderTests.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB37AC6239D14C100FA5388 /* FormViewModelBuilderTests.swift in Sources */,
 				1C802508239A776A00105789 /* SharedMocks.swift in Sources */,
 				1CE04A0D23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift in Sources */,
 				1C8024F4239A617500105789 /* AutoMockable.generated.swift in Sources */,

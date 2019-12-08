@@ -153,3 +153,21 @@ class FormViewModelBuildingMock: FormViewModelBuilding {
     }
 
 }
+class FormViewUpdatesMock: FormViewUpdates {
+
+    //MARK: - update
+
+    var updateWithCallsCount = 0
+    var updateWithCalled: Bool {
+        return updateWithCallsCount > 0
+    }
+    var updateWithReceivedSections: [FormSectionViewModel]?
+    var updateWithClosure: (([FormSectionViewModel]) -> Void)?
+
+    func update(with sections: [FormSectionViewModel]) {
+        updateWithCallsCount += 1
+        updateWithReceivedSections = sections
+        updateWithClosure?(sections)
+    }
+
+}

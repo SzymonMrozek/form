@@ -9,7 +9,6 @@ final class CancellableStore {
     fileprivate var cancellables = [Cancellable]()
     
     deinit {
-        print("cancelling \(cancellables.count)" )
         cancellables.forEach { $0.cancel() }
     }
 }

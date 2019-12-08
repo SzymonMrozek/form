@@ -16,13 +16,13 @@ enum FormViewCoordination {
 
 struct FormViewModelBuilder: FormViewModelBuilding {
     private let formModelController: FormModelControlling
-    private let photoPickerViewModelBuilder: FormPhotoPickerViewModelBuilder
+    private let photoPickerViewModelBuilder: FormPhotoPickerViewModelBuilding
     private let coordination: (FormViewCoordination) -> Void
     private let cancellableStore = CancellableStore()
 
     init(
         formModelController: FormModelControlling,
-        photoPickerViewModelBuilder: FormPhotoPickerViewModelBuilder,
+        photoPickerViewModelBuilder: FormPhotoPickerViewModelBuilding,
         coordination: @escaping (FormViewCoordination) -> Void
     ) {
         self.formModelController = formModelController
@@ -37,7 +37,7 @@ struct FormViewModelBuilder: FormViewModelBuilding {
                 let sections = self.buildSections(basedOnFormMetadata: metadata)
                 updates.update(with: sections)
             case .failure:
-                fatalError()
+                updates.update(with: [])
             }
         })
         .store(in: cancellableStore)

@@ -13,7 +13,7 @@ protocol FormPhotoPickerViewModelBuilding {
     ) -> FormSectionViewModel
 }
 
-struct FormPhotoPickerViewModelBuilder {
+struct FormPhotoPickerViewModelBuilder: FormPhotoPickerViewModelBuilding {
     private let formModelController: FormModelControlling
     private let cancellableStore = CancellableStore()
     
