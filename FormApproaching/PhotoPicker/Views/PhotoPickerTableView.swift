@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+// sourcery: AutoMockable
 protocol PhotoPickerTableViewUpdates: AnyObject {
     func update(with cells: [PhotoPickerCellViewModel])
 }

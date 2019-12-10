@@ -44,6 +44,7 @@ struct ApiResourceProviderMock: ApiResourceProviding {
 }
 
 // MARK: - Photos provider
+// sourcery: AutoMockable
 protocol PhotoAlbumProviding {
     func getPhotos(
         completion: @escaping (Result<PhotosResponse, URLError>) -> Void
@@ -70,6 +71,7 @@ protocol HasApiResourceProviding {
     var apiResourceProviding: ApiResourceProviding { get }
 }
 
+// sourcery: AutoMockable
 protocol HasPhotoAlbumProviding {
     var photoAlbumProviding: PhotoAlbumProviding { get }
 }
