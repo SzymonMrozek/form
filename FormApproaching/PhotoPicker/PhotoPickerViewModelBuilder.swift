@@ -1,5 +1,6 @@
 import Foundation
 
+// sourcery: AutoMockable
 protocol PhotoPickerViewModelBuilding {
     func buildViewModel(updates: PhotoPickerTableViewUpdates) -> PhotoPickerTableViewModel
 }

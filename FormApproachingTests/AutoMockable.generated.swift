@@ -171,3 +171,67 @@ class FormViewUpdatesMock: FormViewUpdates {
     }
 
 }
+class HasPhotoAlbumProvidingMock: HasPhotoAlbumProviding {
+    var photoAlbumProviding: PhotoAlbumProviding {
+        get { return underlyingPhotoAlbumProviding }
+        set(value) { underlyingPhotoAlbumProviding = value }
+    }
+    var underlyingPhotoAlbumProviding: PhotoAlbumProviding!
+
+}
+class PhotoAlbumProvidingMock: PhotoAlbumProviding {
+
+    //MARK: - getPhotos
+
+    var getPhotosCompletionCallsCount = 0
+    var getPhotosCompletionCalled: Bool {
+        return getPhotosCompletionCallsCount > 0
+    }
+    var getPhotosCompletionReceivedCompletion: ((Result<PhotosResponse, URLError>) -> Void)?
+    var getPhotosCompletionReturnValue: Cancellable!
+    var getPhotosCompletionClosure: ((@escaping (Result<PhotosResponse, URLError>) -> Void) -> Cancellable)?
+
+    func getPhotos(        completion: @escaping (Result<PhotosResponse, URLError>) -> Void    ) -> Cancellable {
+        getPhotosCompletionCallsCount += 1
+        getPhotosCompletionReceivedCompletion = completion
+        return getPhotosCompletionClosure.map({ $0(completion) }) ?? getPhotosCompletionReturnValue
+    }
+
+}
+class PhotoPickerTableViewUpdatesMock: PhotoPickerTableViewUpdates {
+
+    //MARK: - update
+
+    var updateWithCallsCount = 0
+    var updateWithCalled: Bool {
+        return updateWithCallsCount > 0
+    }
+    var updateWithReceivedCells: [PhotoPickerCellViewModel]?
+    var updateWithClosure: (([PhotoPickerCellViewModel]) -> Void)?
+
+    func update(with cells: [PhotoPickerCellViewModel]) {
+        updateWithCallsCount += 1
+        updateWithReceivedCells = cells
+        updateWithClosure?(cells)
+    }
+
+}
+class PhotoPickerViewModelBuildingMock: PhotoPickerViewModelBuilding {
+
+    //MARK: - buildViewModel
+
+    var buildViewModelUpdatesCallsCount = 0
+    var buildViewModelUpdatesCalled: Bool {
+        return buildViewModelUpdatesCallsCount > 0
+    }
+    var buildViewModelUpdatesReceivedUpdates: PhotoPickerTableViewUpdates?
+    var buildViewModelUpdatesReturnValue: PhotoPickerTableViewModel!
+    var buildViewModelUpdatesClosure: ((PhotoPickerTableViewUpdates) -> PhotoPickerTableViewModel)?
+
+    func buildViewModel(updates: PhotoPickerTableViewUpdates) -> PhotoPickerTableViewModel {
+        buildViewModelUpdatesCallsCount += 1
+        buildViewModelUpdatesReceivedUpdates = updates
+        return buildViewModelUpdatesClosure.map({ $0(updates) }) ?? buildViewModelUpdatesReturnValue
+    }
+
+}

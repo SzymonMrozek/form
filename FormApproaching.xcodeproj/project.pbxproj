@@ -29,6 +29,7 @@
 		1CFE2B7123990BBE001CA5B6 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B7023990BBE001CA5B6 /* FormViewController.swift */; };
 		1CFE2B73239917E2001CA5B6 /* FormCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B72239917E2001CA5B6 /* FormCoordinator.swift */; };
 		1CFE2B752399195E001CA5B6 /* ControllersBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B742399195E001CA5B6 /* ControllersBuilder.swift */; };
+		73A0FDAB239FB2D800EB9AC3 /* PhotoPickerTableViewModelBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0FDAA239FB2D800EB9AC3 /* PhotoPickerTableViewModelBuilderTests.swift */; };
 		73BDC6DD239E9C9A005CC5EA /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDC6DC239E9C9A005CC5EA /* PhotoPickerViewController.swift */; };
 		73BDC6E2239EB093005CC5EA /* PhotoPickerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDC6E1239EB093005CC5EA /* PhotoPickerTableView.swift */; };
 		73BDC6E4239EB0A9005CC5EA /* PhotoPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDC6E3239EB0A9005CC5EA /* PhotoPickerTableViewCell.swift */; };
@@ -82,6 +83,7 @@
 		1CFE2B7023990BBE001CA5B6 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		1CFE2B72239917E2001CA5B6 /* FormCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCoordinator.swift; sourceTree = "<group>"; };
 		1CFE2B742399195E001CA5B6 /* ControllersBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersBuilder.swift; sourceTree = "<group>"; };
+		73A0FDAA239FB2D800EB9AC3 /* PhotoPickerTableViewModelBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerTableViewModelBuilderTests.swift; sourceTree = "<group>"; };
 		73BDC6DC239E9C9A005CC5EA /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		73BDC6E1239EB093005CC5EA /* PhotoPickerTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerTableView.swift; sourceTree = "<group>"; };
 		73BDC6E3239EB0A9005CC5EA /* PhotoPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		1CE04A0B23928E57000C99D9 /* FormApproachingTests */ = {
 			isa = PBXGroup;
 			children = (
+				73A0FDA9239FB2C100EB9AC3 /* PhotoPicker */,
 				1CB37AC4239BE35700FA5388 /* Form */,
 				1C8024F3239A617500105789 /* AutoMockable.generated.swift */,
 				1C802507239A776A00105789 /* SharedMocks.swift */,
@@ -228,6 +231,14 @@
 				1CFE2B6E23985C59001CA5B6 /* FormPhotoPickerViewModelBuilder.swift */,
 			);
 			path = Photo;
+			sourceTree = "<group>";
+		};
+		73A0FDA9239FB2C100EB9AC3 /* PhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				73A0FDAA239FB2D800EB9AC3 /* PhotoPickerTableViewModelBuilderTests.swift */,
+			);
+			path = PhotoPicker;
 			sourceTree = "<group>";
 		};
 		73BDC6DB239E9C14005CC5EA /* PhotoPicker */ = {
@@ -432,6 +443,7 @@
 				1C802508239A776A00105789 /* SharedMocks.swift in Sources */,
 				1CE04A0D23928E57000C99D9 /* FormPhotoPickerViewModelBuilderTests.swift in Sources */,
 				1C8024F4239A617500105789 /* AutoMockable.generated.swift in Sources */,
+				73A0FDAB239FB2D800EB9AC3 /* PhotoPickerTableViewModelBuilderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
