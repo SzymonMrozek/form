@@ -3,21 +3,20 @@ import XCTest
 
 class PhotoPickerTableViewModelBuilderTests: XCTestCase {
     private var sut: PhotoPickerTableViewModelBuilder!
-    private var dependenciesMock: DependenciesMock!
+    private var photoAlbumProvidingMock: PhotoAlbumProvidingMock!
     private var tableViewUpdatesMock: PhotoPickerTableViewUpdatesMock!
-    private var photoAlbumProviderMock: PhotoAlbumProviderMock!
     
     private let mockUrl = URL(string: "mockUrl.com")!
     
     override func setUp() {
         super.setUp()
         tableViewUpdatesMock = PhotoPickerTableViewUpdatesMock()
-        photoAlbumProviderMock = PhotoAlbumProviderMock()
+        photoAlbumProvidingMock = PhotoAlbumProvidingMock()
     }
     
     override func tearDown() {
         tableViewUpdatesMock = nil
-        photoAlbumProviderMock = nil
+        photoAlbumProvidingMock = nil
         sut = nil
         super.tearDown()
     }
@@ -83,6 +82,20 @@ class PhotoPickerTableViewModelBuilderTests: XCTestCase {
         // Assert
         XCTAssertEqual(selectedUrl, testUrl)
     }
+    
+    func test_deinit_ShouldCancelFetchingPhotos_WhenDeinitialized() {
+        // Arrange
+        mock(urls: nil)
+        let cancellableMock = CancellableMock()
+        photoAlbumProvidingMock.getPhotosCompletionClosure = { _ in cancellableMock }
+        
+        // Act
+        buildViewModel()
+        sut = nil
+        
+        // Assert
+        XCTAssertEqual(cancellableMock.cancelCallsCount, 1)
+    }
 
     @discardableResult private func buildViewModel() -> PhotoPickerTableViewModel {
         return sut.buildViewModel(updates: tableViewUpdatesMock)
@@ -95,33 +108,17 @@ class PhotoPickerTableViewModelBuilderTests: XCTestCase {
         let dataResult: Result<PhotosResponse, URLError> = urls == nil ?
             .failure(URLError(.cancelled)) :
             .success(PhotosResponse(photosURL: urls!))
-        dependenciesMock = DependenciesMock(getPhotosCompletionClosure: { completion -> Cancellable in
+        photoAlbumProvidingMock.getPhotosCompletionClosure = { completion -> Cancellable in
             completion(dataResult)
             return CancellableMock()
-        })
-        sut = PhotoPickerTableViewModelBuilder(dependencies: dependenciesMock, coordination: {
+        }
+        let dependencyMock = HasPhotoAlbumProvidingMock()
+        dependencyMock.underlyingPhotoAlbumProviding = photoAlbumProvidingMock
+        
+        sut = PhotoPickerTableViewModelBuilder(dependencies: dependencyMock, coordination: {
             switch $0 {
             case .selected(let url): coordinationPhotoSelected?(url)
             }
         })
-    }
-}
-
-private class DependenciesMock: HasPhotoAlbumProviding {
-    let photoAlbumProviding: PhotoAlbumProviding
-
-    struct PhotoAlbumProviderMock: PhotoAlbumProviding {
-        var getPhotosCompletionClosure: ((@escaping (Result<PhotosResponse, URLError>) -> Void) -> Cancellable)!
-        func getPhotos(completion: @escaping (Result<PhotosResponse, URLError>) -> Void) -> Cancellable {
-            return getPhotosCompletionClosure.map { $0(completion) }!
-        }
-    }
-        
-    init(
-        getPhotosCompletionClosure: ((@escaping (Result<PhotosResponse, URLError>) -> Void) -> Cancellable)!
-    ) {
-        photoAlbumProviding = PhotoAlbumProviderMock(
-            getPhotosCompletionClosure: getPhotosCompletionClosure
-        )
     }
 }
