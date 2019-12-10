@@ -29,12 +29,17 @@ struct FormCoordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
     
+    private func present(viewController: UIViewController) {
+        navigationController.present(viewController, animated: true, completion: nil)
+    }
+    
     private func showPhotoPicker(callback: @escaping (URL?) -> Void) {
-        push(
+        present(
             viewController: controllersBuilder.buildPhotoPickerViewController(coordination: {
                 switch $0 {
-                case .selected(let url): callback(url)
-                case .cancelled: callback(nil)
+                case .selected(let url):
+                    callback(url)
+                    self.navigationController.dismiss(animated: true)
                 }
             })
         )

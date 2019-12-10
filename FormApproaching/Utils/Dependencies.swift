@@ -1,5 +1,19 @@
 import Foundation
 
+// Just for satisfying protocol
+struct AnyCancellable: Cancellable {
+    let onCancel: () -> Void
+    
+    init(_ onCancel: @escaping () -> Void) {
+        self.onCancel = onCancel
+    }
+    
+    func cancel() {
+        onCancel()
+    }
+}
+
+// MARK: - API resources
 // This interface should be more like, `func perform(request: Request, completion @escaping<Resource, APIError> but in this case it's made for simplifying the app mocking in AppDelegate.swift
 protocol ApiResourceProviding {
     func getFormBaseData(
@@ -13,19 +27,6 @@ protocol ApiResourceProviding {
 }
 
 struct ApiResourceProviderMock: ApiResourceProviding {
-    // Just for satisfying protocol
-    struct AnyCancellable: Cancellable {
-        let onCancel: () -> Void
-        
-        init(_ onCancel: @escaping () -> Void) {
-            self.onCancel = onCancel
-        }
-        
-        func cancel() {
-            onCancel()
-        }
-    }
-    
     func getFormBaseData(
         completion: @escaping (Result<FormBaseDataResponse, URLError>) -> Void
     ) -> Cancellable {
@@ -42,15 +43,47 @@ struct ApiResourceProviderMock: ApiResourceProviding {
     }
 }
 
+// MARK: - Photos provider
+protocol PhotoAlbumProviding {
+    func getPhotos(
+        completion: @escaping (Result<PhotosResponse, URLError>) -> Void
+    ) -> Cancellable
+}
+
+struct PhotoAlbumProviderMock: PhotoAlbumProviding {
+    func getPhotos(
+        completion: @escaping (Result<PhotosResponse, URLError>) -> Void
+    ) -> Cancellable {
+        completion(.success(PhotosResponse(photosURL: [
+            URL(string: "google.com")!,
+            URL(string: "facebook.com")!,
+            URL(string: "youtube.com")!,
+            URL(string: "bing.com")!,
+            URL(string: "reddit.com")!
+        ])))
+        return AnyCancellable { }
+    }
+}
+
+// MARK: - Protocol composition
 protocol HasApiResourceProviding {
     var apiResourceProviding: ApiResourceProviding { get }
 }
 
-struct GlobalDependencies: HasApiResourceProviding {
+protocol HasPhotoAlbumProviding {
+    var photoAlbumProviding: PhotoAlbumProviding { get }
+}
+
+// MARK: - Dependency container
+struct GlobalDependencies {
     let apiResourceProviding: ApiResourceProviding
-    
+    let photoAlbumProviding: PhotoAlbumProviding
     
     init() {
         apiResourceProviding = ApiResourceProviderMock()
+        photoAlbumProviding = PhotoAlbumProviderMock()
     }
 }
+
+extension GlobalDependencies: HasApiResourceProviding { }
+extension GlobalDependencies: HasPhotoAlbumProviding { }

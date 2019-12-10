@@ -26,7 +26,7 @@ struct ControllersBuilder: ControllersBuilding {
         )
         let viewModelBuilder = FormViewModelBuilder(
             formModelController: formModelController,
-            photoPickerViewModelBuilder: FormPhotoPickerViewModelBuilder(
+            formPhotoPickerViewModelBuilder: FormPhotoPickerViewModelBuilder(
                 formModelController: formModelController
             ),
             coordination: coordination
@@ -35,20 +35,13 @@ struct ControllersBuilder: ControllersBuilding {
     }
 
     func buildPhotoPickerViewController(
-        coordination: (PhotoPickerViewCoordination) -> Void
+        coordination: @escaping (PhotoPickerViewCoordination) -> Void
     ) -> UIViewController {
-        // ------ this is just a test
-        coordination(.selected(URL(string: "https://google.com")!))
-        let controller =  UIViewController(nibName: nil, bundle: nil)
-        controller.loadViewIfNeeded()
-        controller.view.backgroundColor = .white
-        return controller
+        let viewModelBuilder = PhotoPickerTableViewModelBuilder(
+            photoAlbumProvider: dependencies.photoAlbumProviding,
+            coordination: coordination
+        )
+        return PhotoPickerViewController(viewModelBuilder: viewModelBuilder)
     }
 
-}
-
-// ------ this is just a test
-enum PhotoPickerViewCoordination {
-    case selected(URL)
-    case cancelled
 }
