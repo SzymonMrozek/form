@@ -29,6 +29,11 @@
 		1CFE2B7123990BBE001CA5B6 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B7023990BBE001CA5B6 /* FormViewController.swift */; };
 		1CFE2B73239917E2001CA5B6 /* FormCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B72239917E2001CA5B6 /* FormCoordinator.swift */; };
 		1CFE2B752399195E001CA5B6 /* ControllersBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFE2B742399195E001CA5B6 /* ControllersBuilder.swift */; };
+		73BDC6DD239E9C9A005CC5EA /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDC6DC239E9C9A005CC5EA /* PhotoPickerViewController.swift */; };
+		73BDC6E2239EB093005CC5EA /* PhotoPickerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDC6E1239EB093005CC5EA /* PhotoPickerTableView.swift */; };
+		73BDC6E4239EB0A9005CC5EA /* PhotoPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDC6E3239EB0A9005CC5EA /* PhotoPickerTableViewCell.swift */; };
+		73BDC6E6239F0611005CC5EA /* PhotoPickerViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDC6E5239F0611005CC5EA /* PhotoPickerViewModelBuilder.swift */; };
+		73BDC6E8239F9640005CC5EA /* PhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDC6E7239F9640005CC5EA /* PhotosResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +82,11 @@
 		1CFE2B7023990BBE001CA5B6 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		1CFE2B72239917E2001CA5B6 /* FormCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCoordinator.swift; sourceTree = "<group>"; };
 		1CFE2B742399195E001CA5B6 /* ControllersBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllersBuilder.swift; sourceTree = "<group>"; };
+		73BDC6DC239E9C9A005CC5EA /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
+		73BDC6E1239EB093005CC5EA /* PhotoPickerTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerTableView.swift; sourceTree = "<group>"; };
+		73BDC6E3239EB0A9005CC5EA /* PhotoPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerTableViewCell.swift; sourceTree = "<group>"; };
+		73BDC6E5239F0611005CC5EA /* PhotoPickerViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewModelBuilder.swift; sourceTree = "<group>"; };
+		73BDC6E7239F9640005CC5EA /* PhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +158,7 @@
 			children = (
 				1CFE2B602398127A001CA5B6 /* Models */,
 				1CFE2B5B23981184001CA5B6 /* Utils */,
+				73BDC6DB239E9C14005CC5EA /* PhotoPicker */,
 				1CFE2B5823981122001CA5B6 /* Form */,
 				1CE049F523928E55000C99D9 /* AppDelegate.swift */,
 				1CE049FE23928E57000C99D9 /* Assets.xcassets */,
@@ -205,6 +216,7 @@
 			children = (
 				1CFE2B6123981285001CA5B6 /* FormBaseDataResponse.swift */,
 				1CFE2B6C239820B2001CA5B6 /* UploadPhotoResponse.swift */,
+				73BDC6E7239F9640005CC5EA /* PhotosResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,6 +228,25 @@
 				1CFE2B6E23985C59001CA5B6 /* FormPhotoPickerViewModelBuilder.swift */,
 			);
 			path = Photo;
+			sourceTree = "<group>";
+		};
+		73BDC6DB239E9C14005CC5EA /* PhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				73BDC6E0239EB088005CC5EA /* Views */,
+				73BDC6DC239E9C9A005CC5EA /* PhotoPickerViewController.swift */,
+				73BDC6E5239F0611005CC5EA /* PhotoPickerViewModelBuilder.swift */,
+			);
+			path = PhotoPicker;
+			sourceTree = "<group>";
+		};
+		73BDC6E0239EB088005CC5EA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73BDC6E1239EB093005CC5EA /* PhotoPickerTableView.swift */,
+				73BDC6E3239EB0A9005CC5EA /* PhotoPickerTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,18 +404,23 @@
 				1CFE2B752399195E001CA5B6 /* ControllersBuilder.swift in Sources */,
 				1CFE2B6D239820B2001CA5B6 /* UploadPhotoResponse.swift in Sources */,
 				1CFE2B5D2398118A001CA5B6 /* Cancellable.swift in Sources */,
+				73BDC6E2239EB093005CC5EA /* PhotoPickerTableView.swift in Sources */,
 				1CFE2B7123990BBE001CA5B6 /* FormViewController.swift in Sources */,
 				1C8024F023996EB100105789 /* FormSectionView.swift in Sources */,
 				1CFE2B6B239819AD001CA5B6 /* FilledForm.swift in Sources */,
 				1CFE2B662398152E001CA5B6 /* FormView.swift in Sources */,
 				1CFE2B6923981692001CA5B6 /* FormPhotoPickerView.swift in Sources */,
+				73BDC6E4239EB0A9005CC5EA /* PhotoPickerTableViewCell.swift in Sources */,
 				1CFE2B5A2398112A001CA5B6 /* FormModelController.swift in Sources */,
 				1CE049F623928E55000C99D9 /* AppDelegate.swift in Sources */,
 				1CFE2B64239814A7001CA5B6 /* FormViewModelBuilder.swift in Sources */,
 				1CFE2B6F23985C59001CA5B6 /* FormPhotoPickerViewModelBuilder.swift in Sources */,
 				1CFE2B73239917E2001CA5B6 /* FormCoordinator.swift in Sources */,
 				1CFE2B5F2398120C001CA5B6 /* Dependencies.swift in Sources */,
+				73BDC6E6239F0611005CC5EA /* PhotoPickerViewModelBuilder.swift in Sources */,
+				73BDC6DD239E9C9A005CC5EA /* PhotoPickerViewController.swift in Sources */,
 				1CFE2B6223981285001CA5B6 /* FormBaseDataResponse.swift in Sources */,
+				73BDC6E8239F9640005CC5EA /* PhotosResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,7 +589,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FormApproaching/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -570,7 +608,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FormApproaching/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
