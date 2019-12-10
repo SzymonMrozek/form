@@ -3,7 +3,7 @@ import XCTest
 
 class FormViewModelBuilderTests: XCTestCase {
     private var sut: FormViewModelBuilder!
-    private var photoPickerViewModelBuilderMock: FormPhotoPickerViewModelBuildingMock!
+    private var formPhotoPickerViewModelBuilderMock: FormPhotoPickerViewModelBuildingMock!
     private var formModelControllerMock: FormModelControllingMock!
     private var viewUpdatesMock: FormViewUpdatesMock!
     private var coordinationMock: F1Mock<FormViewCoordination>!
@@ -12,20 +12,20 @@ class FormViewModelBuilderTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        photoPickerViewModelBuilderMock = FormPhotoPickerViewModelBuildingMock()
+        formPhotoPickerViewModelBuilderMock = FormPhotoPickerViewModelBuildingMock()
         formModelControllerMock = FormModelControllingMock()
         viewUpdatesMock = FormViewUpdatesMock()
         coordinationMock = F1Mock()
         
         sut = FormViewModelBuilder(
             formModelController: formModelControllerMock,
-            photoPickerViewModelBuilder: photoPickerViewModelBuilderMock,
+            formPhotoPickerViewModelBuilder: formPhotoPickerViewModelBuilderMock,
             coordination: coordinationMock.closure
         )
     }
     
     override func tearDown() {
-        photoPickerViewModelBuilderMock = nil
+        formPhotoPickerViewModelBuilderMock = nil
         coordinationMock = nil
         formModelControllerMock = nil
         viewUpdatesMock = nil
@@ -84,6 +84,6 @@ class FormViewModelBuilderTests: XCTestCase {
             $0(fetchedFormMetadata)
             return CancellableMock()
         }
-        photoPickerViewModelBuilderMock.buildViewModelPhotoSectionMetadataCoordinationReturnValue =  photoSection
+        formPhotoPickerViewModelBuilderMock.buildViewModelPhotoSectionMetadataCoordinationReturnValue =  photoSection
     }
 }

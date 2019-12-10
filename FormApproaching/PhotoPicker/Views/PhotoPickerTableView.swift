@@ -11,8 +11,8 @@ struct PhotoPickerTableViewModel {
 }
 
 final class PhotoPickerTableView: UITableView, PhotoPickerTableViewUpdates {
-    var cells: [PhotoPickerCellViewModel]
-    var didSelectPhoto: ((URL) -> Void)?
+    private var cells: [PhotoPickerCellViewModel]
+    private var didSelectPhoto: ((URL) -> Void)?
     
     init() {
         cells = []

@@ -9,33 +9,36 @@ enum PhotoPickerViewCoordination {
 }
 
 struct PhotoPickerTableViewModelBuilder: PhotoPickerViewModelBuilding {
-    private let photoAlbumProvider: PhotoAlbumProviding
+    typealias Dependencies = HasPhotoAlbumProviding
+    private let dependencies: Dependencies
     private let coordination: (PhotoPickerViewCoordination) -> Void
     private let cancellableStore = CancellableStore()
 
     init(
-        photoAlbumProvider: PhotoAlbumProviding,
+        dependencies: Dependencies,
         coordination: @escaping (PhotoPickerViewCoordination) -> Void
     ) {
-        self.photoAlbumProvider = photoAlbumProvider
+        self.dependencies = dependencies
         self.coordination = coordination
     }
     
     func buildViewModel(updates: PhotoPickerTableViewUpdates)
         -> PhotoPickerTableViewModel {
-            photoAlbumProvider.getPhotos { result in
+            dependencies.photoAlbumProviding.getPhotos(completion: { result in
                 switch result {
-                case .success(let data):
-                    let cellViewModels = data.photosURL.map { PhotoPickerCellViewModel(url: $0) }
-                    updates.update(with: cellViewModels)
+                case .success(let response):
+                    let models = response.photosURL.map { PhotoPickerCellViewModel(url: $0) }
+                    updates.update(with: models)
                 case .failure:
                     updates.update(with: [])
                 }
-            }
+            })
             .store(in: cancellableStore)
             
-            return PhotoPickerTableViewModel(cells: []) { url in
+            return PhotoPickerTableViewModel(cells: [], didSelectPhoto: { url in
                 self.coordination(.selected(url))
-            }
-    }    
+            })
+    }
 }
+
+

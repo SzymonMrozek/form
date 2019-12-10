@@ -38,7 +38,7 @@ struct ControllersBuilder: ControllersBuilding {
         coordination: @escaping (PhotoPickerViewCoordination) -> Void
     ) -> UIViewController {
         let viewModelBuilder = PhotoPickerTableViewModelBuilder(
-            photoAlbumProvider: dependencies.photoAlbumProviding,
+            dependencies: dependencies,
             coordination: coordination
         )
         return PhotoPickerViewController(viewModelBuilder: viewModelBuilder)
